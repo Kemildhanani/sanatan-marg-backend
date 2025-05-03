@@ -11,6 +11,7 @@ router.post('/wallpaper/create', async (req, res) => {
         const result = await createWallpaper(wallpaperData);
         res.status(201).json(result);
     } catch (error) {
+    
         res.status(500).json({ message: 'Failed to add wallpaper', error });
     }
 });
@@ -21,6 +22,9 @@ router.get('/wallpapers', async (req, res) => {
         const wallpapers = await getAllWallpapers();
         res.status(200).json(wallpapers);
     } catch (error) {
+        console.log("-------------------------------");
+        console.log("error", error);
+        console.log("-------------------------------");
         res.status(500).json({ message: 'Failed to fetch wallpapers', error });
     }
 });

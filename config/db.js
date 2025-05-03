@@ -1,16 +1,21 @@
 const { MongoClient } = require('mongodb');
-const uri = process.env.MONGO_URI;
+const uri = "mongodb+srv://margofsanatan:margofsanatan@sanatanmarg.c9hpddi.mongodb.net";
+const dbName = "Sanatan-Marg";
 
-const client = new MongoClient(uri);
-let db;
+let cachedClient = null;
+let cachedDb = null;
 
-const connectDB = async () => {
-  await client.connect();
+const connectToDB = async () => {
+  if (cachedDb) return cachedDb;
 
-  db = client.db(process.env.DB_NAME);
-  console.log('MongoDB connected');
+  const client = await MongoClient.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+
+  cachedClient = client;
+  cachedDb = client.db(dbName);
+  return cachedDb;
 };
 
-const getDB = () => db;
-
-module.exports = { connectDB, getDB };
+module.exports = { connectToDB };

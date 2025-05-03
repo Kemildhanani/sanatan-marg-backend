@@ -1,8 +1,8 @@
-const { getDB } = require('../config/db');
+const { connectToDB } = require('../config/db');
 
 
 const getCollection = async () => {
-    const db = getDB()
+    const db = await connectToDB();
     return db.collection('wallpapers');
 };
 
