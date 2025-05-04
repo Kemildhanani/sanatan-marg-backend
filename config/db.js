@@ -9,8 +9,8 @@ const connectToDB = async () => {
   if (cachedDb) return cachedDb;
 
   const client = await MongoClient.connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
   });
 
   cachedClient = client;
